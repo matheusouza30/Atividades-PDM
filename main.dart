@@ -1,62 +1,48 @@
 import 'package:flutter/material.dart';
+import 'questionario.dart';
 
-main() {
-  runApp(ComponenteInicial());
+void main() {
+  runApp(AulaComponentes());
 }
 
-class ComponenteInicial extends StatefulWidget {
+class AulaComponentes extends StatelessWidget {
   @override
-  State<ComponenteInicial> createState() => _ComponenteInicialState();
-}
-
-class _ComponenteInicialState extends State<ComponenteInicial> {
-  var contador = 0;
-
-  final perguntas = [
-    "Sua comida favorita é?",
-    "Qual o seu esporte favorito",
-    "Qual a sua cor preferida?",
-    "Qual o seu animal de estimacao?"
-  ];
-
-  void eventobotao() {
-    setState(() {
-      contador:
-      contador++;
-    });
-    print(contador);
-  }
-
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text("Perguntas e respostas!"),
+      home: Inicio(),
+    );
+  }
+}
+
+class Inicio extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Jogo de perguntas e respostas'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Aqui haverá um questionário de perguntas e respostas, divirta-se!',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
             ),
-            body: Column(
-              children: [
-                Text(perguntas[contador]),
-                ElevatedButton(
-                  onPressed: eventobotao,
-                  child: Text("Clique para a proxima pergunta"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    print("Outra função");
-                  },
-                  child: Text("Clique para outra função"),
-                ),
-                ElevatedButton(
-                  onPressed: () => print("Função arrow"),
-                  child: Text("Meu botao"),
-                ),
-                Column(children: <Widget>[
-                  Text('Perguntas'),
-                  Text('em'),
-                  Text('Flutter'),
-                ]),
-              ],
-            )));
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Questionario()),
+                );
+              },
+              child: Text('Iniciar'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
